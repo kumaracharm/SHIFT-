@@ -1,0 +1,162 @@
+{
+  "experiment_id": "mte_a129c38d3044",
+  "experiment_name": "Moving Target Attack Simulation v1",
+  "seed": 42,
+  "start_time": "2026-11-06T09:03:52.382386+00:00",
+  "end_time": "2026-11-06T09:03:56.240650+00:00",
+  "duration_seconds": 3.858,
+  "total_events": 260,
+  "phases": [
+    {
+      "phase": "baseline",
+      "phase_label": "Phase 1 \u00b7 Normal Baseline",
+      "start_event_index": 0,
+      "end_event_index": 80,
+      "total_events": 80,
+      "flagged_count": 0,
+      "rejected_count": 0,
+      "normal_count": 80,
+      "flag_rate": 0.0,
+      "mean_risk_score": 0.01,
+      "adwin_drifts_detected": 0,
+      "psi_violations": 0,
+      "detection_delay_events": null,
+      "drift_detected_at_event": null,
+      "notes": ""
+    },
+    {
+      "phase": "initial_fraud",
+      "phase_label": "Phase 2 \u00b7 Initial Fraud (Velocity Bursts)",
+      "start_event_index": 80,
+      "end_event_index": 120,
+      "total_events": 40,
+      "flagged_count": 29,
+      "rejected_count": 0,
+      "normal_count": 11,
+      "flag_rate": 0.725,
+      "mean_risk_score": 0.01,
+      "adwin_drifts_detected": 0,
+      "psi_violations": 4,
+      "detection_delay_events": null,
+      "drift_detected_at_event": null,
+      "notes": ""
+    },
+    {
+      "phase": "moving_target",
+      "phase_label": "Phase 3 \u00b7 Moving Target Pivot (Amount Spike / New Payee)",
+      "start_event_index": 120,
+      "end_event_index": 180,
+      "total_events": 60,
+      "flagged_count": 60,
+      "rejected_count": 0,
+      "normal_count": 0,
+      "flag_rate": 1.0,
+      "mean_risk_score": 0.01,
+      "adwin_drifts_detected": 1,
+      "psi_violations": 4,
+      "detection_delay_events": null,
+      "drift_detected_at_event": 127,
+      "notes": ""
+    },
+    {
+      "phase": "drift_detection",
+      "phase_label": "Phase 4 \u00b7 Drift Detection (ADWIN + PSI Evidence)",
+      "start_event_index": 127,
+      "end_event_index": 127,
+      "total_events": 0,
+      "flagged_count": 0,
+      "rejected_count": 0,
+      "normal_count": 0,
+      "flag_rate": 0.0,
+      "mean_risk_score": 0.0,
+      "adwin_drifts_detected": 1,
+      "psi_violations": 4,
+      "detection_delay_events": 7,
+      "drift_detected_at_event": 127,
+      "notes": "ADWIN + PSI fired at event 127 (7 events into pivot phase) before ground-truth labels arrived."
+    },
+    {
+      "phase": "adaptation",
+      "phase_label": "Phase 5 \u00b7 System Adaptation (Increased Sensitivity)",
+      "start_event_index": 180,
+      "end_event_index": 210,
+      "total_events": 30,
+      "flagged_count": 30,
+      "rejected_count": 0,
+      "normal_count": 0,
+      "flag_rate": 1.0,
+      "mean_risk_score": 0.01,
+      "adwin_drifts_detected": 0,
+      "psi_violations": 4,
+      "detection_delay_events": null,
+      "drift_detected_at_event": null,
+      "notes": "Detection sensitivity escalated post-drift. All borderline transactions routed to review."
+    },
+    {
+      "phase": "recovery",
+      "phase_label": "Phase 6 \u00b7 Recovery & Stabilisation",
+      "start_event_index": 210,
+      "end_event_index": 260,
+      "total_events": 50,
+      "flagged_count": 50,
+      "rejected_count": 0,
+      "normal_count": 0,
+      "flag_rate": 1.0,
+      "mean_risk_score": 0.01,
+      "adwin_drifts_detected": 0,
+      "psi_violations": 4,
+      "detection_delay_events": null,
+      "drift_detected_at_event": null,
+      "notes": "Normal transaction baseline restored. Flag rates returned to operational bounds."
+    }
+  ],
+  "drift_detection_delay_events": 7,
+  "drift_detected_before_labels": true,
+  "detection_strategy": "ADWIN_UNLABELLED + PSI",
+  "innovation_summary": "Detected moving-target fraud pivot after 7 events (out of 60 in phase 3), using unlabelled streaming ADWIN signals and multi-feature PSI shifts \u2014 before any ground-truth labels arrived.",
+  "phase_timeline": [
+    {
+      "event_index": 80,
+      "phase": "baseline",
+      "label": "Baseline Established"
+    },
+    {
+      "event_index": 120,
+      "phase": "initial_fraud",
+      "label": "Attacker Active (Velocity Tactic)"
+    },
+    {
+      "event_index": 180,
+      "phase": "moving_target",
+      "label": "Moving Target Pivot Completed"
+    },
+    {
+      "event_index": 127,
+      "phase": "drift_detection",
+      "label": "\u26a1 Drift Detected (Event 127)"
+    },
+    {
+      "event_index": 210,
+      "phase": "adaptation",
+      "label": "Adaptation Policy Deployed"
+    },
+    {
+      "event_index": 260,
+      "phase": "recovery",
+      "label": "System Stabilised"
+    }
+  ],
+  "psi_evidence": {
+    "amount": 11.0524,
+    "log_amount": 11.0524,
+    "transaction_velocity": 1.0272,
+    "time_since_prev": 0.4279
+  },
+  "adwin_evidence": {
+    "unlabelled_observations": 180,
+    "labelled_observations": 0,
+    "unlabelled_status": "DRIFT_DETECTED",
+    "labelled_status": "PENDING_LABELS",
+    "adwin_drifts_in_phase": 1
+  }
+}

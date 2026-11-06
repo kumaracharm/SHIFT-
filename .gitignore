@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Kaggle credentials
+kaggle.json
+.kaggle/
+**/kaggle.json
+
+# Datasets and generated data
+data/raw/
+data/processed/
+*.zip
+*.csv
+
+# Model artifacts and local databases
+saved_models/
+*.joblib
+*.pkl
+*.sqlite
+*.db
+
+# Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Python test/cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
